@@ -10,16 +10,18 @@ export default {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
     entry: path.resolve(__dirname, 'src', 'index.js'),
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
-
     },
 
     plugins: [
         new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') }),
         new webpack.ProgressPlugin(),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+        })
     ],
 
     module: {
@@ -33,9 +35,14 @@ export default {
                 ],
             },
             {
-                test: /.(js)$/,
+                test: /\.m?js$/,
                 exclude: /node_modules/,
-                use: ['babel-loader']
+                use: {
+                  loader: "babel-loader",
+                  options: {
+                    presets: ['@babel/preset-env']
+                  }
+                }
             },
         ],
     },
