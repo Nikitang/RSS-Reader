@@ -66,4 +66,10 @@ function viewModal(post) {
   a.href = post.link;
 }
 
-export { viewPosts, viewFeeds, viewPostTitle, viewFeedTitle, viewModal };
+export { 
+    viewPosts, 
+    viewFeeds, 
+    viewPostTitle, 
+    viewFeedTitle, 
+    viewModal 
+};
