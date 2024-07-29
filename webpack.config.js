@@ -4,20 +4,20 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(dirname, 'src', 'index.js'),
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(dirname, 'dist'),
     clean: true,
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'index.html'),
+      template: path.resolve(dirname, 'src', 'index.html'),
     }),
     new webpack.ProgressPlugin(),
     new MiniCssExtractPlugin({
