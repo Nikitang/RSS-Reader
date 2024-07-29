@@ -33,6 +33,17 @@ const div = document.querySelector('.first');
 const p = document.querySelector('.feedback');
 const clearPost = document.querySelector('.posts');
 
+const i18nextInstance = i18next.createInstance();
+i18nextInstance.init({
+  lng: state.language,
+  debug: true,
+  resources,
+});
+
+let expectValues = yup.object().shape({
+  actual: yup.string().url().required(),
+});
+
 function render() {
   const title = document.querySelector('.title');
   const start = document.querySelector('.start');
@@ -52,17 +63,6 @@ function render() {
     mainFeed.textContent = i18nextInstance.t('feeds');
   }
 }
-
-const i18nextInstance = i18next.createInstance();
-i18nextInstance.init({
-  lng: state.language,
-  debug: true,
-  resources,
-});
-
-let expectValues = yup.object().shape({
-  actual: yup.string().url().required(),
-});
 
 const watchedState = onChange(state, (path, value) => {
   if (path === 'language') {

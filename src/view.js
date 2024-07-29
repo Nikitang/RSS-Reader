@@ -67,9 +67,9 @@ function viewModal(post) {
 }
 
 export {
-  viewPosts, 
-  viewFeeds, 
-  viewFeedTitle, 
-  viewModal, 
-  viewPostTitle
+  viewPosts,
+  viewFeeds,
+  viewFeedTitle,
+  viewModal,
+  viewPostTitle,
 };
