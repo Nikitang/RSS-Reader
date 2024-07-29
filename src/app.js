@@ -120,8 +120,15 @@ function URLgetter(link) {
     return url;
 }
 
+
 function axiosGetter(link) {
     const url = URLgetter(link);
+
+    // Искусственная ошибка сети для проверки
+    if (link === 'https://example.com/invalid-url') {
+        return Promise.reject(new Error('Network Error'));
+    }
+
     return axios.get(url.href);
 }
 
@@ -171,8 +178,14 @@ function timeOut(value) {
         setTimeout(() => timeOut(value), 5000)
     })
     .catch((error) => {
-        console.error(error);
-        p.innerHTML = i18nextInstance.t('feedback.invalidRss');
+        console.error(error.message);
+        if (error.message === 'Network Error') {
+            p.innerHTML = i18nextInstance.t('feedback.networkError');
+
+        } else {
+            p.innerHTML = i18nextInstance.t('feedback.invalidRss');
+
+        }
         p.classList.replace('text-success', 'text-danger');
         input.classList.add('is-invalid');
     });
