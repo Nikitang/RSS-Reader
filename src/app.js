@@ -13,6 +13,43 @@ import {
   viewModal,
 } from './view.js';
 
+const state = {
+  actual: '',
+  urls: [],
+  language: 'ru',
+  content: {
+    feeds: [],
+    posts: [],
+  },
+  readedPosts: new Set(),
+  modal: {
+    post: null,
+  },
+};
+
+const i18nextInstance = i18next.createInstance();
+i18nextInstance.init({
+  lng: state.language,
+  debug: true,
+  resources,
+});
+
+let expectValues = yup.object().shape({
+  actual: yup.string().url().required(),
+});
+
+const watchedState = onChange(state, (path, value) => {
+  if (path === 'language') {
+    i18nextInstance.changeLanguage(value).then(() => render());
+  }
+
+  if (path === 'urls') {
+    expectValues = yup.object().shape({
+      actual: yup.string().url().required().notOneOf(value),
+    });
+  }
+});
+
 function getNewPosts(newPost, oldPost) {
   const oldLinks = oldPost.map((post) => post.link);
   const newLinks = newPost.filter((post) => !oldLinks.includes(post.link));
@@ -119,43 +156,6 @@ function render() {
     mainFeed.textContent = i18nextInstance.t('feeds');
   }
 }
-
-const state = {
-  actual: '',
-  urls: [],
-  language: 'ru',
-  content: {
-    feeds: [],
-    posts: [],
-  },
-  readedPosts: new Set(),
-  modal: {
-    post: null,
-  },
-};
-
-const i18nextInstance = i18next.createInstance();
-i18nextInstance.init({
-  lng: state.language,
-  debug: true,
-  resources,
-});
-
-let expectValues = yup.object().shape({
-  actual: yup.string().url().required(),
-});
-
-const watchedState = onChange(state, (path, value) => {
-  if (path === 'language') {
-    i18nextInstance.changeLanguage(value).then(() => render());
-  }
-
-  if (path === 'urls') {
-    expectValues = yup.object().shape({
-      actual: yup.string().url().required().notOneOf(value),
-    });
-  }
-});
 
 const addButton = document.querySelector('.add-btn');
 const input = document.querySelector('input');
