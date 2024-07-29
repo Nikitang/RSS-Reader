@@ -100,8 +100,10 @@ function load(data) {
         };
         postsArr.push(addId);
     });
-
-    watchedState.content.feeds.push(feeds);
+    const f = watchedState.content.feeds.filter((feed) => feed.title === data.feed.title);
+    if (f.length === 0) {
+        watchedState.content.feeds.push(feeds);
+    }
     watchedState.content.posts = [...watchedState.content.posts, ...postsArr];
     return postsArr
 }
@@ -156,9 +158,14 @@ function timeOut(value) {
             viewFeedTitle();
             viewPostTitle();
         }
+        
+        console.log(data);
+        const f = watchedState.content.feeds.filter((feed) => feed.title === data.feed.title);
+        console.log(f);
+        if (f.length === 0) {
+            viewFeeds([data.feed])
+        }
         viewPosts(load(data));
-
-        viewFeeds([data.feed]);  
         if (!watchedState.urls.includes(watchedState.actual)) {
             watchedState.urls.push(watchedState.actual);
         }
