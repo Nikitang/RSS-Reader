@@ -183,7 +183,7 @@ addButton.addEventListener('click', (e) => {
 const modal = document.querySelector('#modal');
 modal.addEventListener('show.bs.modal', (event) => {
   const buttonId = event.relatedTarget.dataset.id;
-  const post = watchedState.content.posts.find((p) => p.postId === buttonId);
+  const post = watchedState.content.posts.find((postik) => postik.postId === buttonId);
   if (!watchedState.readedPosts.has(buttonId)) {
     watchedState.readedPosts.add(buttonId);
   }
