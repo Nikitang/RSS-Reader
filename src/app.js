@@ -34,24 +34,24 @@ const p = document.querySelector('.feedback');
 const clearPost = document.querySelector('.posts');
 
 function render() {
-    const title = document.querySelector('.title');
-    const start = document.querySelector('.start');
-    const rssLink = document.querySelector('.rss-link');
-    const addBtn = document.querySelector('.add-btn');
-    const link = document.querySelector('.link');
-    const mainPost = document.querySelector('.main-post');
-    const mainFeed = document.querySelector('.main-feed');
-  
-    title.textContent = i18nextInstance.t('RSS');
-    start.textContent = i18nextInstance.t('description');
-    rssLink.textContent = i18nextInstance.t('link');
-    addBtn.textContent = i18nextInstance.t('addButton');
-    link.textContent = i18nextInstance.t('example');
-    if (mainFeed && mainPost) {
-      mainPost.textContent = i18nextInstance.t('posts');
-      mainFeed.textContent = i18nextInstance.t('feeds');
-    }
+  const title = document.querySelector('.title');
+  const start = document.querySelector('.start');
+  const rssLink = document.querySelector('.rss-link');
+  const addBtn = document.querySelector('.add-btn');
+  const link = document.querySelector('.link');
+  const mainPost = document.querySelector('.main-post');
+  const mainFeed = document.querySelector('.main-feed');
+
+  title.textContent = i18nextInstance.t('RSS');
+  start.textContent = i18nextInstance.t('description');
+  rssLink.textContent = i18nextInstance.t('link');
+  addBtn.textContent = i18nextInstance.t('addButton');
+  link.textContent = i18nextInstance.t('example');
+  if (mainFeed && mainPost) {
+    mainPost.textContent = i18nextInstance.t('posts');
+    mainFeed.textContent = i18nextInstance.t('feeds');
   }
+}
 
 const i18nextInstance = i18next.createInstance();
 i18nextInstance.init({
