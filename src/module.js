@@ -32,7 +32,7 @@ let expectValues = yup.object().shape({
     actual: yup.string().url().required(),
 });
 
-const watchedState = onChange(state, (path, value, prevousValue) => {
+const watchedState = onChange(state, (path, value) => {
     if (path === 'language') {
         i18nextInstance.changeLanguage(value).then(() => render());
     }
@@ -49,7 +49,6 @@ const input = document.querySelector('input');
 const div = document.querySelector('.first');
 const p = document.querySelector('.feedback');
 const clearPost = document.querySelector('.posts');
-const clearFeed = document.querySelector('.feeds');
 
 addButton.addEventListener('click', (e) => {
     e.preventDefault();
